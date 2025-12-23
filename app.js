@@ -1,28 +1,29 @@
-import { question } from "readline-sync";
+// import { question } from "readline-sync";
 import { read, write } from "./function.js";
 
 
-
-                                       
+// פונקציה לבקשות משרתים
 export async function fetchUsers() {
   try {
-  const url = "https://jsonplaceholder.typicode.com/users";
-
-  const response = (await fetch(url));
-  const data = await response.json();
-  // console.log(data);
-  
-
-  return data;
-  }
-  catch (err){
-    response.json("faild with message: ", err)
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log("Fetch failed:", err);
+    throw err;
   }
 }
 
 
 
-console.log(await fetchUsers());
+// הפעלת הפונקציה
+try {
+  const users = await fetchUsers();
+  console.log(users);
+} catch (err) {
+  console.log("Error in app");
+}
+
 
 
 
